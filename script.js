@@ -51,3 +51,47 @@ function getUserChoice(userInput) {
 }
 
 /* console.log(getUserChoice(userInput)) */
+
+//TASK 3
+
+// In this section we'll create a function (playRound()) that plays one round of RPS.
+
+/* playRound() will take two parameters (playerSelection, computerSelection). Each of these parameters
+will be set equal to their functions, respectively. The results will be logged as such:
+"You Lose! Paper Beats Rock!" */
+
+/* In simpler terms, playRound() will execute if else statements checking both user and computer inputs
+when put up against one another, and returning a sentence that is the result of the round. */
+
+let playerSelection = getUserChoice(userInput);
+let computerSelection = getComputerChoice(options);
+
+//Try this funciton as a switch statement. It is a lot to write.
+function playRound(playerSelection, computerSelection) {
+    if (playerSelection === computerSelection) {
+        return `It's a tie! Play again to see who wins!`;
+    } else if ((playerSelection === 'rock') && (computerSelection === 'paper')) {
+        return `You Lose! Paper beats Rock!`;
+    } else if ((playerSelection === 'rock') && (computerSelection === 'scissors')) {
+        return `You win! Rock beats Scissors!`;
+    } else if ((playerSelection === 'paper') && (computerSelection === 'rock')) {
+        return `You Win! Paper beats Rock!`;
+    } else if ((playerSelection === 'paper') && (computerSelection === 'scissors')) {
+        return `You Lose! Scissors beats Paper!`;
+    } else if ((playerSelection === 'scissors') && (computerSelection === 'rock')) {
+        return `You Lose! Rock beats Scissors!`;
+    } else if ((playerSelection === 'scissors') && (computerSelection === 'paper')) {
+        return `You Win! Scissors beats paper!`;
+    } else {
+        return `Error. Invalid User Entry.`
+    }
+}
+
+/* console.log(playRound(playerSelection, computerSelection)); */
+
+//TASK 4
+
+/* Write a function called game(). Call playRound() inside this function and play a five round game
+that keeps score & reports a winner and loser. */
+
+/* To do this, we'll create a loop  */
