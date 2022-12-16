@@ -17,12 +17,12 @@ we then created a variable choice that takes the options array, gives it a Math.
 and returns the largest integer less than or equal to a given number. This is applied to Math.random(options)
 which randomizes options multiplied by options length (3). */
 
-const options = ['rock', 'paper', 'scissors'];
-let choice = options[Math.floor(Math.random(options) * options.length)]
-
-function getComputerChoice(options) {
+function getComputerChoice() {
+    const options = ['rock', 'paper', 'scissors'];
+    let choice = options[Math.floor(Math.random(options) * options.length)];
     return choice;
 }
+
 
 /* console.log(getComputerChoice(options)); */
 
@@ -36,21 +36,21 @@ getUserChoice will check the userInput and confirm that it is equal to 'rock', '
 by using if else statements. In this case, else will return "Error, invalid user input." 
 We will finish by applying .toLowerCase to each user input to make it case insensitive*/
 
-let userInput = '';
+/* let userInput = 'rock'; */
 
-function getUserChoice(userInput) {
-    if (userInput.toLowerCase() === options[0]) {
+function getUserChoice() {
+    let userInput = 'scissors';
+    if (userInput.toLowerCase() === 'rock') {
         return userInput.toLowerCase();
-    } else if (userInput.toLowerCase() === options[1]) {
+    } else if (userInput.toLowerCase() === 'paper') {
         return userInput.toLowerCase();
-    } else if (userInput.toLowerCase() === options[2]) {
+    } else if (userInput.toLowerCase() === 'scissors') {
         return userInput.toLowerCase();
     } else {
         return 'Error! Invalid user entry.';
     }
 }
 
-/* console.log(getUserChoice(userInput)) */
 
 //TASK 3
 
@@ -63,35 +63,65 @@ will be set equal to their functions, respectively. The results will be logged a
 /* In simpler terms, playRound() will execute if else statements checking both user and computer inputs
 when put up against one another, and returning a sentence that is the result of the round. */
 
-let playerSelection = getUserChoice(userInput);
-let computerSelection = getComputerChoice(options);
+let userScore = 0;
+let computerScore = 0;
+let roundWinner = '';
 
-//Try this funciton as a switch statement. It is a lot to write.
-function playRound(playerSelection, computerSelection) {
+function playRound() {
+    let playerSelection = getUserChoice();
+    let computerSelection = getComputerChoice();
+
     if (playerSelection === computerSelection) {
+        roundWinner = 'tie';
         return `It's a tie! Play again to see who wins!`;
-    } else if ((playerSelection === 'rock') && (computerSelection === 'paper')) {
-        return `You Lose! Paper beats Rock!`;
-    } else if ((playerSelection === 'rock') && (computerSelection === 'scissors')) {
-        return `You win! Rock beats Scissors!`;
-    } else if ((playerSelection === 'paper') && (computerSelection === 'rock')) {
-        return `You Win! Paper beats Rock!`;
-    } else if ((playerSelection === 'paper') && (computerSelection === 'scissors')) {
-        return `You Lose! Scissors beats Paper!`;
-    } else if ((playerSelection === 'scissors') && (computerSelection === 'rock')) {
-        return `You Lose! Rock beats Scissors!`;
-    } else if ((playerSelection === 'scissors') && (computerSelection === 'paper')) {
-        return `You Win! Scissors beats paper!`;
-    } else {
-        return `Error. Invalid User Entry.`
+
+    } if (
+        (playerSelection === 'rock' && computerSelection === 'scissors') ||
+        (playerSelection === 'scissors' && computerSelection === 'paper') ||
+        (playerSelection === 'paper' && computerSelection === 'rock') 
+    ) {
+            userScore++;
+            roundWinner = 'Player';
+            return `You Win! ${playerSelection} beats ${computerSelection}! The score is now Player 1: ${userScore} Computer: ${computerScore}`;
+
+     } if (
+        (computerSelection === 'rock' && playerSelection === 'scissors') ||
+        (computerSelection === 'scissors' && playerSelection === 'paper') ||
+        (computerSelection === 'paper' && playerSelection === 'rock') 
+     ) {
+            computerScore++;
+            roundWinner = 'Computer'
+            return `You Lose! ${computerSelection} beats ${playerSelection}! The score is now Player 1: ${userScore} Computer: ${computerScore}`;
+     }
+    
     }
+
+function isGameOver() {
+    for (let i = 0; i < 6; i++) {
+        if ((playerScore === 5) || (computerScore === 5)) {
+            break;
+        } console.log(playRound());
+    }
+    
 }
 
-/* console.log(playRound(playerSelection, computerSelection)); */
+
+console.log(playRound());
 
 //TASK 4
 
 /* Write a function called game(). Call playRound() inside this function and play a five round game
 that keeps score & reports a winner and loser. */
 
-/* To do this, we'll create a loop  */
+/* To do this, we'll create a while loop that will continue to play until the number of rounds (i) is < 5.
+We will need to determine a way to store each rounds results in order to tally a winner.*/
+
+
+/* to this point, we've got it so it will play and log 5 rounds of RPS. Now we need to come up wtih a way
+to log the results of each round and determine a final score.
+To do this, we'll create two var userScore and compScore. After each round, we need to stop (break),
+look at the result, and add a point to each score.*/
+
+/*If playRound = winnning outcome => console.log('playround() + userScore = $userScore & compScore = $compScore) 
+same for losing outcomes*/
+
